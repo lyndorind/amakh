@@ -12,4 +12,8 @@ def read_root():
 
 @app.get("/items")
 def get_items():
-    return [{"item_id": 1, "name": "Apple"}, {"item_id": 2, "name": "Banana"}]
+    return [
+        {"item_id": 1, "name": "Double Espresso"},
+        {"item_id": 2, "name": "Sleepless Night"},
+        {"item_id": 3, "name": "Successful Git Push"},
+    ]
