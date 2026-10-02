@@ -13,12 +13,14 @@ A simple REST service created for a university laboratory project.
 Synchronize the project dependencies:
 ```bash
 uv sync
+```
 Run the service with Uvicorn:
-
+```bash
 uv run uvicorn src.my_rest_api.main:app --reload
+```
 The service is available at http://localhost:8000.
-Interactive Swagger documentation is available at http://localhost:8000/docs.
+Interactive Swagger documentation is available at http://localhost:8000/docs. 
 
 ## Endpoints
-GET / — returns a message confirming that the service is running.
-GET /items — returns a list of items or specific item data.
+* GET / — returns a message confirming that the service is running.
+* GET /items — returns a list of items or specific item data.
