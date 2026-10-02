@@ -39,6 +39,7 @@ jobs:
         version: v0.1.0
         github_token: ${{ secrets.GITHUB_TOKEN }}
 
+
       - name: Upload Release Assets
         uses: softprops/action-gh-release@v2
         with:
