@@ -25,6 +25,3 @@ runs:
         generate_release_notes: true
       env:
         GITHUB_TOKEN: ${{ inputs.github_token }}
-
-
-
