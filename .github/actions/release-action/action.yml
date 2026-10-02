@@ -1,0 +1,25 @@
+name: "Composite Release Action"
+description: "Creates a git tag and GitHub release"
+inputs:
+  version:
+    description: "Version tag to release"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Create Git Tag
+      run: |
+        git config user.name "GitHub Actions Bot"
+        git config user.email "actions@github.com"
+        git tag ${{ inputs.version }}
+        git push origin ${{ inputs.version }}
+      shell: bash
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ inputs.version }}
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
