@@ -34,9 +34,11 @@ jobs:
           sha256sum * > checksums.txt
 
       - name: Run Release Composite Action
-        uses: ./.github/actions/release-action
-        with:
-          version: v0.1.0
+      uses: ./.github/actions/release-action
+      with:
+        version: v0.1.0
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+
 
       - name: Upload Release Assets
         uses: softprops/action-gh-release@v2

@@ -4,6 +4,9 @@ inputs:
   version:
     description: "Version tag to release"
     required: true
+  github_token:
+    description: "Token for GH CLI"
+    required: true
 runs:
   using: "composite"
   steps:
@@ -21,5 +24,7 @@ runs:
         tag_name: ${{ inputs.version }}
         generate_release_notes: true
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.github_token }}
+
+
 
