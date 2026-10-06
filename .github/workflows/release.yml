@@ -5,10 +5,10 @@ on:
     branches:
       - main
     paths-ignore:
-      - 'README.md'
-      - 'CODE_OF_CONDUCT.md'
-      - 'CONTRIBUTING.md'
+      - '**.md'
       - '.github/ISSUE_TEMPLATE/**'
+      - '.devcontainer/**'
+      - '.editorconfig'
 
 jobs:
   release:
