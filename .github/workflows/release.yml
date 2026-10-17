@@ -19,11 +19,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python & uv
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - uses: astral-sh/setup-uv@v3
+      - name: Set up  uv
+        uses: astral-sh/setup-uv@v3
 
       - name: Build package
         run: uv build
@@ -33,16 +30,21 @@ jobs:
           cd dist
           sha256sum * > checksums.txt
 
+      - name: Extract version from CHANGELOG
+        run: |
+          VERSION=$(grep -m 1 -oE '[0-9]+\.[0-9]+\.[0-9]+' CHANGELOG.md)
+          echo "APP_VERSION=v$VERSION" >> $GITHUB_ENV
+
       - name: Run Release Composite Action
         uses: ./.github/actions/release-action
         with:
-          version: v0.1.0
+          version: ${{ env.APP_VERSION }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload Release Assets
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v0.1.0
+          tag_name: ${{ env.APP_VERSION }}
           files: |
             dist/*
         env:
