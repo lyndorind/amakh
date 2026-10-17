@@ -1,8 +1,8 @@
-# Кодекс поведінки (Code of Conduct)
+# Code of Conduct
 
-Ми прагнемо створити дружнє та безпечне середовище для всіх учасників.
+We are committed to providing a friendly and safe environment for all participants.
 
-## Наші стандарти
-- Будьте ввічливими та поважайте інших.
-- Конструктивно сприймайте критику під час Code Review.
-- Забороняються будь-які прояви дискримінації чи образ.
+## Our Standards
+- Be polite and respectful to others.
+- Accept constructive criticism gracefully during Code Review.
+- Any form of discrimination or harassment is strictly prohibited.
