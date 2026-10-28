@@ -26,3 +26,13 @@ jobs:
 
       - name: Lint with Ruff
         run: ruff check .
+      
+      - name: Run tests with coverage
+        run: python -m pytest --cov=src --cov-report=xml --alluredir=allure-results
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage.xml
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
