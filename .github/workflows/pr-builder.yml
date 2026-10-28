@@ -6,26 +6,34 @@ on:
       - main
 
 jobs:
-  build-and-hash:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Треба для SonarQube
 
       - name: Install uv
         uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884
 
-      - name: Build package
-        run: uv build
-
-      - name: Generate SHA-256 checksums
+      - name: Install dependencies, Ruff and Pytest
         run: |
-          cd dist
-          sha256sum * > checksums.txt
+          uv pip install --system ruff pytest pytest-cov
 
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: package-and-hashes
-          path: dist/
-          retention-days: 7
+      - name: Run Ruff (Linter)
+        run: ruff check .
+
+      - name: Run Pytest (Tests & Coverage)
+        run: pytest --cov=. --cov-report=xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

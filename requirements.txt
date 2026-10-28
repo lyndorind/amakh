@@ -1,0 +1,6 @@
+ruff
+pytest
+pytest-cov
+allure-pytest
+fastapi
+httpx
